@@ -38,3 +38,13 @@ def my_first_template(request):
         "mensaje": "Organiza tus proyectos y tareas en un solo lugar",
     }
     return render(request, "tasks/my-first-template.html", contexto)
+
+def about_me(request):
+    return HttpResponse("Acerca de mí")
+
+def greeting(request, nombre):
+    """Vista que saluda al usuario por su nombre."""
+    return HttpResponse(f"¡Hola, {nombre}! Bienvenido a TaskFlow.")
+
+def leads_like(request):
+    return render(request, "tasks/leads-like.html")
