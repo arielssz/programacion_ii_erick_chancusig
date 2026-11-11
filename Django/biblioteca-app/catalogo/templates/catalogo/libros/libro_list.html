@@ -1,0 +1,81 @@
+
+{% load l10n %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Libros</title>
+
+    <style>
+        table {
+            border: 1px solid gray;
+            width: 750px;
+        }
+
+        th, td {
+            border: 1px solid gray;
+            padding: 3px;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        .boton {
+            display: inline-block;
+            border: 2px outset #ccc;
+            padding: 3px 8px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lista de Libros</h1>
+
+    
+<p>
+    <a class="boton" href="{% url 'create_libro' %}">Crear Nuevo Libro</a>
+    <a class="boton" href="{% url 'categoria_list' %}">Lista de Categorías</a>
+    <a class="boton" href="/">Atrás</a>
+</p>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Fecha de Publicación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for libro in libros %}
+            <tr>
+                <td>{{ libro.titulo }}</td>
+                <td>{{ libro.autor }}</td>
+                <td>{{ libro.fecha_publicacion|date:"j \d\e F \d\e Y" }}</td>
+                <td>
+                    <a href="{% url 'libro_edit' libro.pk %}">Editar</a>
+                    <a href="{% url 'libro_delete' libro.pk %}">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No hay libros registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="4">Total de libros: {{ libros|length }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+</body>
+</html>

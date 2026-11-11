@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from catalogo.models import Categoria
 from catalogo.forms.categoria_form import CategoriaForm
 
 
+@login_required
 def categoria_list(request):
     categorias = Categoria.objects.all()
 
@@ -14,6 +16,7 @@ def categoria_list(request):
     )
 
 
+@login_required
 def categoria_create(request):
     if request.method == 'POST':
         form = CategoriaForm(request.POST)
