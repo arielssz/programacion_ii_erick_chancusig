@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Autores</title>
+
+    <style>
+        table {
+            border: 1px solid gray;
+            width: 700px;
+        }
+
+        th, td {
+            border: 1px solid gray;
+            padding: 6px;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        .boton {
+            display: inline-block;
+            border: 2px outset #ccc;
+            padding: 3px 8px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Biblioteca</h1>
+    <h2>Listado de Autores</h2>
+
+    <p>
+        <a class="boton" href="{% url 'create_autor' %}">Nuevo autor</a>
+        <a class="boton" href="{% url 'libro_list' %}">Lista de Libros</a>
+        <a class="boton" href="/">Atrás</a>
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Nacionalidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for autor in autores %}
+            <tr>
+                <td>{{ autor.id }}</td>
+                <td>{{ autor.nombre }}</td>
+                <td>{{ autor.apellido }}</td>
+                <td>{{ autor.nacionalidad }}</td>
+                <td>
+                    <a href="{% url 'autor_edit' autor.pk %}">Editar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay autores registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
